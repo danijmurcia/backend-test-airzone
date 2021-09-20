@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+    database:
+        image: mysql:8
+        restart: always
+        environment:
+            MYSQL_DATABASE: 'airzone_test'
+            MYSQL_USER: 'dani'
+            MYSQL_PASSWORD: 'Y5x7=@5wGd,5PaAJ'
+            MYSQL_ROOT_PASSWORD: 'Y5x7=@5wGd,5PaAJ'
+        ports:
+            - '3306:3306'
+        volumes:
+            - ./docker/mysql/data:/var/lib/mysql
