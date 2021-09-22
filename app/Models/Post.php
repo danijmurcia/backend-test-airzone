@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Post extends Model
 {
@@ -24,7 +26,8 @@ class Post extends Model
         'comment',
         'pending',
         'public',
-        'active'
+        'active',
+        'user'
     ];
 
     /**
@@ -35,4 +38,44 @@ class Post extends Model
     protected $dates = [
         'added', 'updated'
     ];
+
+    /**
+     * Relationship with comments through comment_post
+     *
+     * @return BelongsToMany
+     */
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class, 'comment_post', 'blog', 'comment');
+    }
+
+    /**
+     * Relationship with user
+     *
+     * @return HasOne
+     */
+    public function owner()
+    {
+        return $this->hasOne(User::class, 'id', 'user');
+    }
+
+    /**
+     * Relationship with category
+     *
+     * @return HasOne
+     */
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id');
+    }
+
+    /**
+     * Relationship with users through comment_post
+     *
+     * @return BelongsToMany
+     */
+    public function writers()
+    {
+        return $this->belongsToMany(User::class, 'comment_post', 'blog', 'comment');
+    }
 }

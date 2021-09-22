@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-
+    //TODO Personalmente el full_name guardaría en la db unicamente username y surname. Y con un mutator crearía el full_name
     protected $table = 'user';
-
-    //TODO Personalmente el full_name guardaria en la db unicamente username y surname. Y con un mutator crearia el full_name en el mismo modelo
 
     /**
      * The attributes that are mass assignable.
@@ -21,4 +19,15 @@ class User extends Model
         'username',
         'full_name'
     ];
+
+    /**
+     * Relationship with comment
+     *
+     * @return HasMany
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'user');
+    }
+
 }
