@@ -24,3 +24,9 @@ Route::group(['prefix' => 'categories'], function () {
     Route::put('{category}', [CategoryController::class, 'update']);
     Route::delete('{category}', [CategoryController::class, 'destroy']);
 });
+
+// Posts
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('', [PostController::class, 'index']);
+    Route::get('{id}', [PostController::class, 'show']);
+});
