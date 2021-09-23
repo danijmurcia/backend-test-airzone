@@ -9,7 +9,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        $users = User::with('post')->get();
         return sendResponse($users, 'Usuarios listados correctamente');
     }
 }

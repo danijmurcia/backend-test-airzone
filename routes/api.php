@@ -16,17 +16,11 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-// Usuarios
-Route::group(['prefix' => 'users'], function () {
-    Route::get('', [UserController::class, 'index']);
-});
-
-// Posts
-Route::group(['prefix' => 'posts'], function () {
-    Route::get('', [PostController::class, 'index']);
-});
-
 // Categorias
 Route::group(['prefix' => 'categories'], function () {
     Route::get('', [CategoryController::class, 'index']);
+    Route::get('{category}', [CategoryController::class, 'show']);
+    Route::post('', [CategoryController::class, 'store']);
+    Route::put('{category}', [CategoryController::class, 'update']);
+    Route::delete('{category}', [CategoryController::class, 'destroy']);
 });
